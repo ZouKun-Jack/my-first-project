@@ -1,0 +1,1411 @@
+题目1：在屏幕上显示
+########
+First test
+********
+程序：
+#include <stdio.h>
+int main()
+{
+	printf("########\n");
+	printf("First test\n");
+	printf("********\n");
+	return 0;
+}
+
+
+题目6：编写一个c语言程序，计算并显示32.6、55.2、67.9、48.6、这四个数的平均值。
+
+#include <stdio.h>
+int main()
+{
+	printf("%f\n",(32.6+55.2+67.9+48.6)/4);
+	return 0;
+} 
+
+
+题目10：计算567的各位数字，十位数字，百位数字，并显示到屏幕上。
+提示：使用％和／运算符。
+
+#include <stdio.h>
+int main()
+{
+	printf("%d\n%d\n%d\n",7/1,67/10,567/100);
+	return 0;
+}
+
+
+
+题目18:假设你每月向银行账户存100美元，年利率为5%，那么每月利率是0.05/12=0.00417。
+第一个月之后，账户上的值就变成：
+100*(1+0.00417)=100.417
+第二个月之后，账户上的值就变成：
+(100＋100.417)*(1+0.00417)=201.252
+第三个月之后，账户上的值就变成：
+(100+201.252)*(1+0.00417)=302.252
+以此类推，编写程序显示五个月后账户上的钱数。
+
+
+＃include <stdio.h>
+int main()
+{
+	float a,b;
+	a=(100+302.252)*(1+0.00417);
+	b=(100+a)*(1+0.00417);
+	printf("%f",b);
+	return 0;
+}
+
+
+题目20:编写程序，提示用户输入两个点（x1，y1）和（x2，y2），然后显示两点间的距离。计算两点间的距离公式是
+√(x2-x1)²+(y2-y1)².提示：可以使用pow和sqrt函数。
+
+
+# include <stdio.h>
+# include <math.h>
+int main()
+{
+	int x1,x2,y1,y2;
+	double d;
+	printf("输入两个点坐标：\n");
+	scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+	d=sqrt(pow(x2-x1,2)+pow(y2-y1,2));
+	printf("\n%f\n",d);
+	return 0;
+}
+
+
+
+
+第二次c语言作业
+
+题目1：从键盘上输入两个数，如第一个数大于第二个输出“num1>num2“，如第一个数小于第二个数输出”num1<num2“，
+如第一个数等于第二个数输出“num1=num2”；
+
+
+#include <stdio.h>
+int main()
+{
+	float num1,num2;
+	scanf("%f%f",&num1,&num2);
+	if(num1>num2)
+	{	
+		printf("num1>num2");
+	}
+	else if(num1<num2)
+	{
+		printf("num1<num2");
+	}
+	else
+	{
+		printf("num1=num2");
+	}
+	return 0;
+}
+
+
+题目2:输入学生的成绩，根据成绩输出相应的等级，如输入成绩为90～100，则输出A，如成绩为80～89，则输出B,
+如成绩为70～79，则输出C，如成绩为60～69，则输出D，成绩小于60分，则输出E。
+
+＃include <stdio.h>
+int main()
+{
+	float score;
+	scanf("%f\n",&score);
+	if(score>=90&&score<=100)
+	{
+		printf("A");
+	}
+	else if(score>=80&&score<=89)
+	{
+		printf("B");
+	}
+	else if(score>=70&&score<=79)
+	{
+		printf("C");
+	}
+	else if(score>=60&&score<=69)
+	{
+		printf("D");
+	}
+	else
+	{
+		printf("E");
+	}
+	return 0;
+}
+
+题目5：个人所得税计算公式为：
+所得税＝税率＊（收入－3500）－扣除数
+相应标准如下：
+全月应纳税所额              税率           扣除数
+                  
+收入<=3500                 0              0
+3500<收入<=5000            3%             0
+5000<收入<=8000            10%           105
+8000<收入<=12500           20%           555
+12500<收入<=38500          25%           1005
+38500<收入<=58500          30%           2755
+58500<收入<=83500          35%           5505
+83500<收入                 45%           13505
+
+根据以上标准，计算相应的所得税
+
+
+#include <stdio.h>
+int main()
+{
+	float income,tax;
+	scanf("%f",&income);
+	if(income<=3500)
+	{
+		printf("tax=0");
+	}
+	else if(income>3500&&income<=5000)
+	{
+		tax=0.03*(income-3500);
+	}
+	else if(income>5000&&income<=8000)
+	{
+		tax=0.1*(income-3500)-105;
+	}
+	else if(income>8000&&income<=12500)
+	{
+		tax=0.2*(income-3500)-555;
+	}
+	else if(income>12500&&income<=38500)
+	{
+		tax=0.25*(income-3500)-1005;
+	}
+	else if(income>38500&&income<=58500)
+	{
+		tax=0.3*(income-3500)-2755;
+		}
+	else if(income>58500&&income<=83500)
+	{
+		tax=0.35*(income-3500)-5505;
+	}
+	else
+	{
+		tax=0.45*(income-3500)-13505;
+	}
+	printf("%f",tax);
+	return 0;
+}
+
+
+
+题目14:编写程序，提示用户输入一个年份，然后显示该年份是闰年或者是非闰年的结果。
+
+
+#include <stdio.h>
+int main()
+{
+	int years;
+	printf("请输入一个年份：\n");
+	scanf("%d",&years);
+	if(years%4==0)
+	{
+		printf("闰年");
+	}
+	else
+	{
+		printf("非闰年");
+	}
+	return 0;
+}
+
+
+题目22:编写程序，提示用户输入一个点（x，y），然后检查这个点是否在以原点（0，0）为圆心，半径为10的园内，
+例如：（4，5）是园内一点，而（9，9）是圆外一点。
+
+
+#include <stdio.h>
+#include <math.h>
+int main()
+{
+	float x,y;
+	printf("请输入一个点坐标：");
+	scanf("%f%f",&x,&y);
+    if(sqrt(pow(x,2)+pow(y,2))<10)
+    {
+    	printf("该点在圆内");
+    }
+    else if(sqrt(pow(x,2)+pow(y,2))==10)
+    {
+    	printf("该点在圆上");
+    }
+    else
+    {
+    	printf("该点在圆外");
+    }
+    return 0;
+}
+
+
+题目24:编写程序计算税金，美国国家联邦个人所得税是基于纳税人登记的身份和可征税收入计算的。纳税人登记的身份
+有四种：单身纳税人，已婚共同纳税人，已婚单独纳税人和家庭户主纳税人。税率会随年变化。下表给出2009年的税率。
+即如果你是单身纳税人，可征税收入为10000美元，那么可征税收入的前8350美元的税率为10%，而剩下的1650美元的税率
+为15%。所以，你应付的税金为1082.5美元。
+
+2009年美国国家联邦个人收入所得税税率表
+税率    单身纳税人      已婚共同纳税人        已婚单独纳税人      家庭户主纳税人
+10%    0-8350         0-16700             0-8350           0-11950
+15%    8351-33950     16701-67900         8351-33950       11951-45500
+25%    33951-52250    67901-137050        33951-68525      45501-117450
+28%    52251-171550   137051－208850      68526-104425     117451-190200
+33%    171551-372950  208851-372950       104426-186475    190201-372950
+35%    372951+        372951+             186476+          372951+
+
+
+#include <stdio.h>
+int main()
+{
+	char type;
+	printf("type\n1.single taxpayer\n2.married commom taxpayer\n
+	3.married individual\n4.household head taxpayer");
+	scanf("%c",&type);
+	float income,tax=0.0;
+	printf("income");
+	scanf("%f",&income);
+	switch(type)
+	{
+		case '1':
+			float income,tax;
+			printf("income");
+			scanf("%f",&income);
+			if(income<=8350)
+			{
+				tax=0.1*income;
+			}
+			else if(income>=8351&&income<=33950)
+			{
+				tax=0.15*(income-8350)+0.1*8350;
+			}
+			else if(income>=33951&&income<=52250)
+			{
+				tax=0.25*(income-33950)+0.15*(33950-8350)+0.1*8350;
+			}
+			else if(income>=52251&&income<=171550)
+			{
+				tax=0.28*(income-52250)+0.25*(52250-33950)
+				+0.15*(33950-8350)+0.1*8350;
+			}
+			else if(income>=171551&&income<=372950)
+			{
+				tax=0.33*(income-171550)+0.28*(171550-52250)
+				+0.25*(52250-33950)+0.15*(33950-8350)+0.1*8350;
+			}
+			else
+			{
+				tax=0.35*(income-372950)+0.33*(372950-171550)
+				+0.28*(171550-52250)+0.25*(52250-33950)+0.15*(33950-8350)
+				+0.1*8350;
+			}
+			break;
+		case '2':
+			float income,tax;
+			printf("income");
+			scanf("%f",&income);
+			if(income<=16700)
+			{
+				tax=0.1*income;
+			}
+			else if(income>=16701&&income<=67900)
+			{
+				tax=0.1*16700+0.15*(income-16700);
+			}
+			else if(income>=67901&&income<=137050)
+			{
+				tax=0.1*16700+0.15*(67900-16700)+0.25*(income-67900);
+			}
+			else if(income>=137051&&income<=208850)
+			{
+				tax=0.1*16700+0.15*(67900-16700)+0.25*(137050-67900)+
+				0.28*(income-137050);
+			}
+			else if(income>=208851&&income<=372950)
+			{
+				tax=0.1*16700+0.15*(67900-16700)+0.25*(137050-67900)+
+				0.28*(208850-137050)+0.33*(income-208850);
+			}
+			else
+			{
+				tax=0.1*16700+0.15*(67900-16700)+0.25*(137050-67900)+
+				0.28*(208850-137050)+0.33*(372950-208850)+0.35*(income-372950);
+			}
+			break;
+		case '3':
+			float income,tax;
+			printf("income");
+			scanf("%f",&income);
+			if(income<=8350)
+			{
+				tax=0.1*income;
+			}
+			else if(income>=8351&&income<=33950)
+			{
+				tax=0.1*8350+0.15*(income-8350);
+			}
+			else if(income>=33951&&income<=68525)
+			{
+				tax=0.1*8350+0.15*(33950-8350)+0.25*(income-33950);
+			}
+			else if(income>=68526&&income<=104425)
+			{
+				tax=0.1*8350+0.15*(33950-8350)+0.25*(68525-33950)
+				+0.28*(income-68525);
+			}
+			else if(income>=104426&&income<=186475)
+			{
+				tax=0.1*8350+0.15*(33950-8350)+0.25*(68525-33950)
+				+0.28*(104425-68525)+0.33*(income-104425);
+			}
+			else
+			{
+				tax=0.1*8350+0.15*(33950-8350)+0.25*(68525-33950)
+				+0.28*(104425-68525)+0.33*(186475-104425)
+				+0.35*(income-186475);
+			}
+
+		case '4':
+			float income,tax;
+			printf("income");
+			scanf("%f",&income);
+			if(income<=11950)
+			{
+				tax=0.1*income;
+			}
+			else if(income>=11951&&income<=45500)
+			{
+				tax=0.1*11950+0.15*(income-11950);
+			}
+			else if(income>=45501&&income<=117450)
+			{
+				tax=0.1*11950+0.15*(45500-11950)+0.25*(income-45500);
+			}
+			else if(income>=117451&&income<=190200)
+			{
+				tax=0.1*11950+0.15*(45500-11950)+0.25*(117450-45500)
+				+0.28*(income-117450);
+			}
+			else if(income>=190201&&income<=372950)
+			{
+				tax=0.1*11950+0.15*(45500-11950)+0.25*(117450-45500)
+				+0.28*(190200-117450)+0.33*(income-190200);
+			}
+			else
+			{
+				tax=0.1*11950+0.15*(45500-11950)+0.25*(117450-45500)
+				+0.28*(190200-117450)+0.33*(372950-190200)
+				+0.35*(income-372950);
+			}
+
+			break;
+	}
+			printf("tax=%f",tax);
+			return 0;
+}
+
+
+第三次c语言作业
+
+题目1:从500开始，求被3，5，7除余数均为2的前50个数。
+
+
+#include <stdio.h>
+int main()
+{
+	int a,b;
+	a=500;
+	b=1;
+	while(b<=50)
+	{
+		if(a%3==2&&a%5==2&&a%7==2)
+		{
+			printf("%d\n",a);
+			a++;
+			b++;
+		}
+		else
+			a++;
+	}
+	return 0;
+}
+
+
+
+题目2:打印形状为正方形和直角三角形的乘法九九表
+
+
+正方形
+#include <stdio.h>
+int main()
+{
+    int i,j,k;
+    for(i=1;i<=9;i++)
+    {
+        for(j=1;j<=9;j++)
+        {
+            k=i*j;
+            printf("%dx%d=%-3d",j,i,k);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+直角三角形
+#include <stdio.h>
+int main()
+{
+    int i,j,k;
+    for(i=1;i<=9;i++)
+    {
+        for(j=1;j<=i;j++)
+        {
+            k=i*j;
+            printf("%dx%d=%-3d",j,i,k);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+
+
+题目4:鸡兔同笼问题。鸡兔共有30个头，90只脚，编程计算鸡兔各有多少只
+
+#include <stdio.h>
+int main()
+{
+	int x,y;
+	for(x=1;x<=30;x++)
+	{
+	y=30-x;
+	if(2*x+4*y==90&&x+y==30)
+	printf("鸡有%d只\n兔有%d只",x,y);
+	}
+	return 0;
+}
+
+
+
+题目6:编写程序输出以下图形
+
+  *
+ ***
+*****
+ ***
+  *
+  
+#include <stdio.h>
+int main()
+{
+    int i,j,k;
+    for(i=1;i<=3;i++)
+    {
+        for(j=1;j<=3-i;j++)
+            printf(" ");
+        for(k=1;k<=2*i-1;k++)
+            printf("*");
+        printf("\n");
+    }
+    for(i=1;i<=2;i++)
+    {
+        for(j=1;j<=i;j++)
+            printf(" ");
+        for(k=1;k<=5-2*i;k++)
+            printf("*");
+        printf("\n");
+    }
+    return 0;
+}
+
+
+
+题目16:编写程序，计算1!+2!+3!+……+20!。
+
+
+#include <stdio.h>
+int main()
+{
+    int i,j,k,s=0;
+    for(i=1;i<=20;i++)
+    {
+        k=1;
+        for(j=1;j<=i;j++)
+        {
+            k=k*j;
+        }
+        s=s+k;
+    }
+    printf("%d",s);
+    return 0;
+}
+
+
+题目21：如果一个正整数等于除它本身之外的其他所有除数之和，就称之为完全数。例如，6是一个完全数，因为6=1+2+3.
+下一个完全数是28=14+2+4+2+1.编写程序，输出1000以下所有完全数。
+
+
+#include <stdio.h>
+int main()
+{
+	int i,j,k;
+	for(i=1;i<1000;i++)
+	{
+		k=0;
+		for(j=1;j<i;j++)
+		{
+			if(i%j==0)
+			k=k+j;
+		}
+		if(k==i)
+		printf("%d\n",k);
+	}
+	return 0;
+}
+
+
+
+题目23：猴子吃桃子问题。猴子第一天摘下若干桃子，当即吃掉一半，还不过瘾，又多吃了一个。第二天早上又将
+剩下的桃子吃掉一半，又多吃了一个。以后每天早上都吃了前一天剩下的一半零一个。到第十天早上想再吃的时候，
+只剩下一个桃子了，求第一天共摘了多少个桃子。
+
+
+ #include <stdio.h>
+ int get(int n);
+int main()
+{
+    int num=get(1);
+    printf("%d",num);
+    return 0;
+}
+int get(int n)
+	{
+    	int num;
+        if(n==11)
+        {
+            return 1;
+        }
+        else
+        {
+            return 2*(get(n+1)+1);
+            
+     }
+}   
+
+
+
+
+
+第四次c语言作业
+
+
+题目1:求m!(n!*(m-n)!)的值。要求：求某个数的阶乘必须用自定义函数实现。
+
+#include <stdio.h>
+int a(int);
+int b();
+int m,n;
+int main()
+{
+    
+    scanf("%d %d",&m,&n);
+    if(m>=n&&m>=0&&n>=0)
+    {
+        b();
+        printf("%d",b());
+    }
+    else
+        printf("负数没有阶乘");
+    
+    return 0;
+    
+}
+int a(int i)
+{
+    if(i==1)
+        return 1;
+    
+    else
+        return i*a(i-1);
+}
+
+int b()
+{
+    int t;
+    t=a(m)*(a(n)*a(m-n));
+    return t;
+}
+
+	
+
+
+题目3:输入两个正整数，求其最大公约数和最小公倍数。要求：求最大公约数，最小公倍数的功能必须要自定义函数实现。
+
+
+#include<stdio.h>  
+void main()   /*  辗转相除法求最大公约数 */   
+{   
+   int m, n, a, b, t, c;  
+   printf("Input two integer numbers:\n");  
+   scanf("%d%d", &a, &b);  
+   m=a;   n=b;  
+   while(b!=0)  /* 余数不为0，继续相除，直到余数为0 */   
+   { c=a%b; a=b;  b=c;}  
+   printf("The largest common divisor:%d\n", a);  
+   printf("The least common multiple:%d\n", m*n/a);  
+} 
+
+#include <stdio.h>
+int a,b,m,n,c;
+int a(int i,int j);
+int b(int i,int j);
+int main()
+{
+	
+	printf("Input two integer numbers:\n"); 
+	scanf("%d%d", &a, &b);  
+	a(int i,int j);
+	b(int i,int j);
+	printf("The largest common divisor:%d\n", a(int i,int j));  
+    printf("The least common multiple:%d\n", b(int i,int j));
+    return 0;
+}
+a(int i,int j)
+{
+	m=a;   
+	n=b;  
+    while(b!=0)  /* 余数不为0，继续相除，直到余数为0 */   
+    {
+    	c=a%b; 
+    	a=b; 
+    	b=c;
+    }  
+}
+b(int i,int j)
+{
+	return m*b/a;
+	}
+	
+	
+	
+	
+	
+	
+第七次作业
+题目1:定义字符串比较函数，按照字典顺序比较两个字符串的大小，如果字符串1比字符串2大，则返回1，
+如果字符串1比字符串2小，则返回－1，相等则返回0.
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    char a[20],b[20];
+    
+    gets(a);
+    gets(b);
+    if(strcmp(a,b)>0)
+    printf("1");
+    else
+    {
+        if(strcmp(a,b)<0)
+        printf("-1");
+        else
+            printf("0");
+            
+    }
+    return 0;
+}
+
+
+
+题目2:利用上题中定义的字符串比较函数，输入字符串1和字符串2，若字符串1比字符串2大，则把字符串2
+连接到字符串1的后面；否则，则把字符串1连接到字符串2后面，并输出连接后的新字符串和长度。
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    char a[20],b[20];
+    
+    gets(a);
+    gets(b);
+    if(strcmp(a,b)>0)
+    {
+        strcat(a,b);
+        puts(a);
+    }
+    else
+    {
+        strcat(b,a);
+        puts(b);
+    }
+    return 0;
+}
+
+
+题目3:采用字符指针，将一个字符串中出现的特定字符删除。例如，假设输入的字符串为“abcdefad”，
+删除'a'字符，则删除后的字符串为“bcdefd”。注：必须真正删除字符串中的‘a’字符，而不是不显示
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    char a[20];
+    char c;
+    int i,k;
+    gets(a);
+    scanf("%c",&c);
+    k=strlen(a);
+    for(i=0;i<k;i++)
+    {
+        if(a[i]!=c)
+            printf("%c",a[i]);
+    }
+    return 0;
+    
+
+}
+
+
+题目4：有n个国家名，要求按字母先后顺序排列，并按升序输出
+要求：尽量使用标准字符串函数
+
+
+#include <stdio.h>
+#include <string.h>
+# define N 5
+int main()
+{
+    int i,j;
+    char s[N][20];
+    char temp[20];
+    for(i=0;i<N;i++)
+    {
+        scanf("%s",&s[i][20]);
+    }
+    for(j=0;j<=N-2;j++)
+    {
+        for(i=0;i<N-j-1;i++)
+        {
+            if(strcmp(s[i],s[i+1])>0)
+            {
+                strcpy(temp,s[i+1]);
+                strcpy(s[i+1],s[i]);
+                strcpy(s[i],temp);
+            }
+        }
+    }
+    for(i=0;i<N;i++)
+        puts(s[i]);
+}
+
+
+题目9:编写程序，输入一个以回车结束的字符串，将它的内容逆序输出。
+
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+    int n,i;
+    char a[100],b[100];
+    gets(a);
+    n=strlen(a);
+    for(i=0;i<n;i++)
+    {
+        b[n-i-1]=a[i];
+
+    }
+    puts(b);
+    return 0;
+}
+
+
+题目10:编写程序，输入一个以回车结束的字符串，把字符串中所有数字字符（“0”－“9”）转换位整数，去掉其他字符。
+例如，字符串“3a56bc”转换为整数后是356.
+#include <stdio.h>
+#include <string.h>
+int main()
+{
+	int i;
+	char a[100];
+	gets(a);
+	for(i=0;a[i]!='\0';i++)
+	{
+	if(a[i]<='9'&&a[i]>='0')
+	printf("%c",a[i]);
+	}
+	return 0;
+}
+
+
+第八次作业
+题目1:根据输入的日期（自己定义的结构体，包含年，月，日成员），计算该日期是这一年的第几天。
+（注：需要考虑闰年）
+
+#include<stdio.h>
+struct date
+{
+	int year;
+	int month;
+	int day;
+};
+int leapyear(struct date d) //定义闰年函数
+{
+	if((d.year%4==0&&d.year%100!=0)||d.year%400==0)
+	return 1;
+	else
+	return 0;
+}
+int getmonthdays(int year,int month)//定义获取一个月天数的函数
+{
+	int monthdays[]={31,28,31,30,31,30,31,31,30,31,30,31};
+	if(leapyear==1&&month==2)
+	return 29;
+	else
+	return monthdays[month-1];
+}
+int whichdays(struct date d)//定义计算第几天函数
+{
+	int i,s=0;
+	for(i=1;i<d.month;i++)
+	{
+		s=s+getmonthdays(d.year,i);
+	}
+	return s+d.day;
+}
+void main()
+{
+	struct date today;
+	int whichday;
+	scanf("%d%d%d",&today.year,&today.month,&today.day);
+	whichday=whichdays(today);
+	printf("%d",whichday);
+}
+
+
+题目2:设有3个学生，每个学生有三门课，求每个学生的平均分，并将学生姓名及平均分输出。
+
+
+#include <stdio.h>
+#include <string.h>
+struct Student
+{
+    char name[20];
+    float score[3];
+}student[3];
+void main()
+{
+    int i;
+    printf("依次输入三个学生姓名及三科成绩：\n");
+    for(i=0;i<3;i++)
+    scanf("%s%f%f%f",&student[i].name,&student[i].score[0],&student[i].score[1],&student[i].score[2]);
+    printf("\n");
+    for(i=0;i<3;i++)
+    {
+        printf("%s\n",student[i].name);
+        printf("%.2f\n",(student[i].score[0]+student[i].score[1]+student[i].score[2])/3);
+    }
+}
+
+
+
+题目3：设职工工资表中有职工编号workers_number，姓名，基本工资basic_wages，奖金reward，扣税tax
+和实发工资real_wages，要求根据输入的各项求实发工资，并按实发工资的升序输出职工工资表。
+
+#include <stdio.h>
+struct Worker
+{
+	int number;
+	char name[20];
+	float basic_wages;
+	float reward;
+	float tax;
+}worker[5];
+float real_wages(struct Worker worker)//计算实发工资
+{	
+	float realwages;
+	realwages=worker.basic_wages+worker.reward-worker.tax;
+	return realwages;
+}
+void bubblesort(float *p,int n)//冒泡排序
+{
+	int i,j,temp;
+	for(i=0;i<n-1;i++)
+	for(j=0;j<n-i-1;j++)
+	if(p[j]>p[j+1])
+	{
+		temp=p[j];
+		p[j]=p[j+1];
+		p[j+1]=temp;
+	}
+}
+	
+int main()
+{
+	int i;
+	printf("依次输入五名职工的编号，姓名，基本工资，奖金，扣税：");
+	for(i=0;i<5;i++)
+	scanf("%d%s%.2f%.2f%.2f",&workers[i].number,&worker[i].name,&worker[i].basic_wages,&worker[i].reward,&worker[i].tax);
+	printf("\n");
+	float a[5];
+	for(i=0;i<5;i++)
+	{
+		a[i]=real_wages(worker[i]);
+	}
+	bubblesort(a,5);
+	for(i=0;i<5;i++)
+	printf("%.2f",a[i]);
+	return 0;
+}
+
+
+
+题目4:
+假设已存在一个链表head，每个节点包含两个成员num和next，要求输入一个num，能删除该链表中num
+的节点，最后输出该链表。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+		
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	     
+    
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
