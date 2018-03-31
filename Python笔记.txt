@@ -2454,6 +2454,104 @@ time: 1.1920928955078125e-06
 
 Python中的函数的参数定义和可变参数
 https://www.cnblogs.com/tqsummer/archive/2011/01/25/1944416.html
+
+2.带参装饰器
+
+在上面的装饰器调用中，比如@decorator_demo
+该装饰器默认它后面的函数是唯一的参数
+装饰器的语法允许我们调用decorator时，提供其他参数
+比如@decorator(a)，这样，就为装饰器的编写和使用提供了更大的灵活性
+
+#带参装饰器
+
+def pre_str(pre=""):
+	def decorator(old_function):
+		def new_function(a,b):
+			print(pre + "input",a,b)
+			return old_function(a,b)
+		return new_function
+	return decorator
+	
+#装饰square_sum()
+@pre_str("^_^")
+def square_sum(a,b):
+	return a**2 + b**2   
+	
+#装饰square_diff()
+@pre_str("T_T")
+def square_diff(a,b):
+	return a**2 - b**2
+
+if __name__ == '__main__':
+	print(square_sum(3,4))
+	print(square_diff(3,4))
+	
+^_^input 3 4
+25
+T_Tinput 3 4
+-7
+
+	
+上面的pre_str是一个带参装饰器，它实际上是对原有装饰器的一个函数封装
+并返回一个装饰器，我们可以将它理解为一个含有环境参量的闭包
+当我们使用@pre_str("^_^")调用的时候，py能够发现这一层的封装
+并把参数传递到装饰器的环境中，该调用相当于：
+
+square_sum = pre_str("^_^")(square_sum)
+
+根据参数不同，带参装饰器会对函数进行不同的加工，进一步提高了装饰器的适用范围
+还是以网站的用户验证为例子，装饰器负责验证的功能，装饰了处理HTTP请求的函数
+可能有的关键HTTP请求需要管理员权限，有的只需要普通用户权限
+因此，我们可以把“管理员”和“用户”作为参数，传递给验证装饰器
+对于那些负责关键HTTP请求的函数，我们可以把“管理员”参数传给装饰器
+对于负责普通HTTP请求的函数，我们可以把“用户”参数传给它们的装饰器
+这样，同一个装饰器就可以满足不同的需求了
+
+3.装饰类
+
+在上面的例子中，装饰器接收一个函数，并返回一个函数
+从而起到加工函数的效果，装饰器还拓展到了类
+一个装饰器可以接收一个类，并返回一个类，从而起到加工类的效果
+
+def decorator_class(SomeClass):
+	class NewClass(object):
+		def __init__(self,age):
+			self.total_display = 0
+			self.wrapped = SomeClass(age)
+		def display(self):
+			self.total_display += 1
+			print('total display',self.total_display)
+			self.wrapped.display()
+	return NewClass
+
+@decorator_class
+class Bird:
+	def __init__(self,age):
+		self.age = age
+	def display(self):
+		print('my age is',self.age)
+		
+if __name__ == '__main__':
+	eagle_lord = Bird(5)
+	for i in range(3):
+		eagle_lord.display()
+
+total display 1
+my age is 5
+total display 2
+my age is 5
+total display 3
+my age is 5
+		
+在装饰器decorator_class中，我们返回了一个新类NewClass
+在新类的构造器中，我们用一个属性self.wrapped记录了原来类生成的对象
+并附加了新的属性total_display，用于记录调用display()的次数
+我们也同时更改了display方法，通过装饰
+我们的Bird类可以调用display()的次数
+无论是装饰函数，还是装饰类，装饰器的核心作用都是名称绑定
+虽然装饰器出现较晚，但在各个py项目中的使用却很广泛
+即便不需要自定义装饰器，你也很有可能会在自己的项目中调用其他库中的装饰器
+因此，py程序员需要掌握这一语法
 		
  
 
