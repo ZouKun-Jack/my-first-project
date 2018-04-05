@@ -2886,13 +2886,115 @@ for i in [x**2 for x in range(100000000)]:
 py中的itertools包还提供了丰富的操作迭代器的工具
 感兴趣的读者可以自行搜集
 
+拓展：itertools包
 
+标准库中的itertools包提供了更加灵活的生成迭代器的工具
+这些工具的输入大都是已有的迭代器，另一方面
+这些工具完全可以自行使用py实现
+该包只是提供了一种比较标准，高效的实现方式
+这也符合py“只有且最好只有一个解决方案”的理念
 
+#引入itertools
 
+from itertools import *
 
+这个包中提供了很多有用的生成器
+下面两个生成器能返回无限循环的迭代器：
 
-	
+count(5,2)   #从5开始的整数迭代器，每次增加2，即5，7，9，11，13...
 
+cycle('abc') #重复序列的元素，即a,b,c,a,b,c...
+
+repeat()既可以返回一个不断重复的迭代器，也可以是有次数限制的重复：
+
+repeat(1,2)  #重复1.2,构成无穷迭代器,即1.2,1.2,1.2,...
+
+repeat(10,5) #重复10，共重复5次
+
+我们还能组合旧的迭代器，来生成新的迭代器：
+
+chain([1,2,3],[4,5,6])  #连接两个迭代器成为一个  1,2,3,4,5,6
+
+product("abc",[1,2])    #多个迭代器集合的笛卡尔积，相当于嵌套循环
+
+所谓的笛卡尔积可以得出集合所有可能的组合方式：
+
+for m,n in product("abc",[1,2]):
+	print(m,n)
+
+如下所示：
+
+permutations("abc",2)    #从'abc'中挑选两个元素，比如ab,bc,...
+                         #将上面所有结果排序，返回为新的迭代器
+                         #上面的组合区分顺序，即ab,ba都返回
+
+combinations("abc",2)    从'abc'中挑选两个元素，比如ab,bc,...
+                         #将上面所有结果排序，返回为新的迭代器
+                         #上面的组合不分顺序
+	                     #即ab,ba，只返回一个ab
+
+combinations_with_replacement("abc",2)  #与上面类似
+										#但允许两次选出的元素重复
+										#即多了，aa,bb,cc
+
+itertools包中还提供了许多有用的高阶函数：
+
+starmap(pow,[(1,1),(2,2),(3,3)])  #pow将依次作用于表的每个tuple
+
+takewhile(lambda x:x < 5,[1,3,6,7,1])
+#当函数返回True时，收集元素到迭代器，一旦函数返回False，则停止。1,3
+
+dropwhile(lambda x:x < 5,[1,3,6,7,1])
+#跳过元素，一旦函数返回True，则开始收集剩下的所有元素到迭代器。6,7,1
+
+包中提供了groupby()函数，能将一个key()函数作用于原迭代器的各个元素
+从而获得各个函数的键值，根据key()函数结果，将拥有元素分组
+每个分组中的元素都保留了键值相同的返回结果
+函数groupby()分出的组放在一个迭代器中返回
+
+如果有一个迭代器，包含一群人的身高，我们可以使用这样的一个key()函数：
+如果身高大于180，返回"tall";如果身高低于160，返回"short";
+中间的返回"middle"，最终，所有身高将分为三个迭代器
+即"tall","short","middle"
+
+from itertools import groupby
+
+def height_class(h):
+    if h > 180:
+        return "tall"
+    elif h < 160:
+        return "short"
+    else:
+        return "middle"
+
+friends = [191,158,159,165,170,177,181,182,190]
+
+friends = sorted(friends,key = height_class)
+
+for m,n in groupby(friends,key = height_class):
+
+    print(m)
+    print(list(n))
+    
+middle
+[165, 170, 177]
+short
+[158, 159]
+tall
+[191, 181, 182, 190]
+
+注意：groupby()的功能类似于UNIX中的uniq命令
+分组之前需要使用sorted()对原迭代器的元素
+根据key()函数进行排序，让同组元素先在位置上靠拢
+
+这个包中还有其他一些工具，方便迭代器的构建：
+
+compress("abcd",[1,1,1,0])   #根据[1,1,1,0]的真假值情况，选择
+                             #保留第一个参数中的元素，a,b,c
+islice()      #类似于slice()函数，只是返回的是一个迭代器
+izip()        #类似于zip()函数，只是返回的是一个迭代器
+
+         
 
 
 
